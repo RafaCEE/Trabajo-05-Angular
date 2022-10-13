@@ -18,6 +18,10 @@ export class DashboardComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+      .subscribe(heroes => this.heroes = heroes.sort((a,b) => {
+        if (b.score > a.score) return 1;
+        if (b.score < a.score) return -1;
+        return 0;
+      }).slice(0, 3));
   }
 }
